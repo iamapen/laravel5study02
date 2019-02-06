@@ -17,4 +17,14 @@ class HomeTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
+    function testStatusCode() {
+        $res = $this->get('/home');
+        $res->assertStatus(200);
+    }
+    
+    function testBody() {
+        $res = $this->get('/home');
+        $res->assertSeeText("こんにちは！");
+    }
 }
