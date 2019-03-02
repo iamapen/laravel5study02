@@ -4,7 +4,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class UserController extends \App\Http\Controllers\Controller
@@ -19,6 +21,16 @@ final class UserController extends \App\Http\Controllers\Controller
         return view('user.index', [
             'user' => $user,
         ]);
+    }
+
+    public function detail(string $id): View
+    {
+        return view('user.detail');
+    }
+
+    public function userDetail(string $id): Response
+    {
+        return new Response(view('user.detail'), Response::HTTP_OK);
     }
 
     public function store(Request $request)
