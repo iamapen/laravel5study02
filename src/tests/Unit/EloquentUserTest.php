@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tests\Unit;
 
@@ -8,13 +9,19 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class EloquentUserTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $this->assertTrue(true);
+    use RefreshDatabase;
+
+    function testFind() {
+        $userId = 1;
+        factory(\App\User::class)->create([
+            'id' => $userId,
+        ]);
+
+        $sut = new \App\User();
+        $user = $sut->find($userId);
+        $this->assertInstanceOf(\App\User::class, $user);
+        $this->assertSame($userId, $user->id);
+
+        $this->assertNull($sut->find(999));
     }
 }
