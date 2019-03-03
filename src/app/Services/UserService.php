@@ -1,0 +1,32 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Services;
+
+use App\User;
+
+class UserService
+{
+
+    /**
+     * 検索
+     * @param string $id
+     * @return User
+     */
+    public function retrieveUser(string $id): User
+    {
+        return new User([
+            'id' => $id,
+            'name' => 'Laravel',
+        ]);
+    }
+
+    /**
+     * @param string $id
+     * @param string $name
+     */
+    public function activate(string $id, string $name): void
+    {
+        // 登録処理など
+    }
+}
