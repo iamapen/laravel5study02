@@ -30,12 +30,10 @@ class UserResponder
      */
     public function response(UserModel $user): Response
     {
+        $statusCode = Response::HTTP_OK;
         if (!$user->id) {
-            $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
+            $statusCode = Response::HTTP_NOT_FOUND;
         }
-        $this->response->setContent(
-            $this->view->make('user.index', ['user' => $user])
-        );
-        return $this->response;
+        return response(view('user.index', ['user' => $user]), $statusCode);
     }
 }
