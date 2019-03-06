@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 final class PayloadController
 {
@@ -75,6 +76,20 @@ final class PayloadController
             Response::HTTP_OK,
             ['content-type' => 'application/vnd.laravel-api.json']
         );
+        return $res;
+    }
+
+    /**
+     * ダウンロード
+     * @return BinaryFileResponse
+     */
+    public function download(): BinaryFileResponse
+    {
+        $filepath = __FILE__;
+
+        $res = \Response::download($filepath, 'controller.php', ['content-type' => 'text/plain']);
+        // ヘルパ関数を使う場合
+        $res = response()->download($filepath, 'controller.php', ['content-type' => 'text/plain']);
         return $res;
     }
 }
