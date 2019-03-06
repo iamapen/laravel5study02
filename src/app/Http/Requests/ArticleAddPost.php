@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Illuminate\Contracts\Validation\Validator as ValidatorInterface;
 
 class ArticleAddPost extends FormRequest
 {
@@ -17,6 +20,17 @@ class ArticleAddPost extends FormRequest
         return true;
     }
 
+    public function validator(ValidationFactory $factory): ValidatorInterface
+    {
+        // ASCII英字のみの独自バリデータを追加
+        // 汎用のものはクラスに切り出した方がよい
+        Validator::extend('ascii_alpha', function ($attr, $value, $params) {
+            return preg_match('/\A[a-zA-Z]+\z/', $value);
+        });
+
+        return $this->createDefaultValidator($factory);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,7 +39,7 @@ class ArticleAddPost extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:10', 'unique:users', ],
+            'name' => ['required', 'max:10', 'unique:users', 'ascii_alpha'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email', ],
             'age' => 'integer',
         ];
@@ -42,6 +56,8 @@ class ArticleAddPost extends FormRequest
             'email.max' => 'emailは255文字までで入力してください',
             'email.unique' => 'そのemailは既に使われています',
             'age.integer' => '年齢は数字で入力してください',
+
+            'name.ascii_alpha' => '名前は半角アルファベットで入力してください',
         ];
     }
 }
