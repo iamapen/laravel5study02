@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
+});
+
+Route::get('/articles/new', App\Http\Actions\Article\ArticleNewAction::class);
+Route::post('/articles', App\Http\Actions\Article\ArticleAddAction::class);
