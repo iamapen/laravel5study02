@@ -13,7 +13,8 @@ class ArticleAddPost extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        // 認可はミドルウェアで行う
+        return true;
     }
 
     /**
@@ -24,7 +25,9 @@ class ArticleAddPost extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'size:10', 'unique:users', ],
+            'email' => ['required', 'email', 'size:255', 'unique:users,email', ],
+            'age' => 'integer',
         ];
     }
 }
