@@ -16,6 +16,9 @@
   <li><a href="/sse">SSE (Server-Sent Events)</a></li>
 </ul>
 
-
+<h1>REST API HATEOAS(Hypermedia As The Engine Of Application State)</h1>
+<ul>
+  <li><a href="/articles">/articles</a></li>
+</ul>
 </body>
 </html>

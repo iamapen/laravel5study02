@@ -26,3 +26,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 });
 
 Route::get('/sse', App\Http\Actions\StreamAction::class);
+
+Route::get('/articles', App\Http\Apis\ArticlePayloadAction::class);
