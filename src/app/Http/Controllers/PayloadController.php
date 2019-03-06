@@ -22,4 +22,18 @@ final class PayloadController
 
         return $res;
     }
+
+    /**
+     * Viewを使う例
+     * @return Response
+     */
+    public function useView(): Response
+    {
+        // Facadeを使う場合
+        $res = \Response::view('sample.file');
+        // ヘルパ関数を使う場合
+        $view = view('sample.file');
+        $res = response($view, Response::HTTP_OK);
+        return $res;
+    }
 }
