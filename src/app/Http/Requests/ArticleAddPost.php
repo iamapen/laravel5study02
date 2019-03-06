@@ -28,7 +28,19 @@ class ArticleAddPost extends FormRequest
             return preg_match('/\A[a-zA-Z]+\z/', $value);
         });
 
-        return $this->createDefaultValidator($factory);
+        $validator = $this->createDefaultValidator($factory);
+
+        // メールマガジンを受け取る入力があった場合、
+        // 年齢が20以上のルールを追加
+        // メッセージの指定のしかたが不明
+        $validator->sometimes(
+            'age',
+            ['integer', 'min:20'],
+            function (\Illuminate\Support\Fluent $input) {
+                return $input->magazine === 'allow';
+            }
+        );
+        return $validator;
     }
 
     /**
