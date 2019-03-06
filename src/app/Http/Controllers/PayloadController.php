@@ -50,4 +50,17 @@ final class PayloadController
         $res = response()->json(['status' => 'success']);
         return $res;
     }
+
+    /**
+     * JSONPレスポンス
+     * @return JsonResponse
+     */
+    public function jsonp(): JsonResponse
+    {
+        // Facadeを使う場合
+        $res = \Response::jsonp('funcName', ['status' => 'success']);
+        // ヘルパ関数を使う場合
+        $res = response()->jsonp('funcName', ['status' => 'success']);
+        return $res;
+    }
 }
