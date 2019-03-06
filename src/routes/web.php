@@ -20,4 +20,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/useView', 'PayloadController@useView');
     Route::get('/json', 'PayloadController@json');
     Route::get('/jsonp', 'PayloadController@jsonp');
+    Route::get('/orgMediaType', 'PayloadController@orgMediaType');
 });

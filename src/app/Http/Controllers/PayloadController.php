@@ -63,4 +63,18 @@ final class PayloadController
         $res = response()->jsonp('funcName', ['status' => 'success']);
         return $res;
     }
+
+    /**
+     * 独自メディアタイプの例
+     * @return JsonResponse
+     */
+    public function orgMediaType(): JsonResponse
+    {
+        $res = response()->json(
+            ['status' => 'success'],
+            Response::HTTP_OK,
+            ['content-type' => 'application/vnd.laravel-api.json']
+        );
+        return $res;
+    }
 }
