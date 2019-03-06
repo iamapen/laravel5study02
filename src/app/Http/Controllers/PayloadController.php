@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -90,6 +91,26 @@ final class PayloadController
         $res = \Response::download($filepath, 'controller.php', ['content-type' => 'text/plain']);
         // ヘルパ関数を使う場合
         $res = response()->download($filepath, 'controller.php', ['content-type' => 'text/plain']);
+        return $res;
+    }
+
+    /**
+     * ダウンロード
+     * @param Request $req
+     * @return RedirectResponse
+     */
+    public function redirect(Request $req): RedirectResponse
+    {
+        // 下記はすべて同じ結果が得られる
+        $res = \Response::redirectTo('/');
+        $res = response()->redirectTo('/');
+        $res = redirect('/');
+
+        // redirect時に様々な動作を行う例
+        // sessionにflashとして詰められる
+        $res = redirect('/')
+            ->withInput($req->all())
+            ->with('error', 'validation error.');
         return $res;
     }
 }

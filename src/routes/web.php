@@ -22,4 +22,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/jsonp', 'PayloadController@jsonp');
     Route::get('/orgMediaType', 'PayloadController@orgMediaType');
     Route::get('/download', 'PayloadController@download');
+    Route::get('/redirect', 'PayloadController@redirect');
 });

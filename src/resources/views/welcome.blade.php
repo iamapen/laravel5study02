@@ -12,6 +12,7 @@
   <li><a href="/jsonp">JSONPレスポンス</a></li>
   <li><a href="/orgMediaType">独自メディアタイプ</a></li>
   <li><a href="/download">ダウンロード</a></li>
+  <li><a href="/redirect">リダイレクト</a></li>
 </ul>
 
 
