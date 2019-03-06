@@ -25,9 +25,23 @@ class ArticleAddPost extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'size:10', 'unique:users', ],
-            'email' => ['required', 'email', 'size:255', 'unique:users,email', ],
+            'name' => ['required', 'max:10', 'unique:users', ],
+            'email' => ['required', 'email', 'max:255', 'unique:users,email', ],
             'age' => 'integer',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => '名前は必須です',
+            'name.max' => '名前は10文字までで入力してください',
+            'name.unique' => 'その名前は既に使われています',
+            'email.required' => 'emailは必須です',
+            'email.email' => 'emailが不正です',
+            'email.max' => 'emailは255文字までで入力してください',
+            'email.unique' => 'そのemailは既に使われています',
+            'age.integer' => '年齢は数字で入力してください',
         ];
     }
 }
