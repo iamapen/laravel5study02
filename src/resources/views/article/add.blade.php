@@ -5,6 +5,15 @@
 </head>
 <body>
 <h1>記事投稿フォーム</h1>
+
+<ul>
+@if(count($errors) > 0)
+  @foreach($errors->all() as $errmsg)
+    <li>{{$errmsg}}</li>
+  @endforeach
+@endif
+</ul>
+
 <form name="registForm" action="/articles" method="post">
   {{csrf_field()}}
   名前：<label><input type="text" name="name" size="30"><span>{{$errors->first('name')}}</span></label><br>
