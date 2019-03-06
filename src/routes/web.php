@@ -24,3 +24,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/download', 'PayloadController@download');
     Route::get('/redirect', 'PayloadController@redirect');
 });
+
+Route::get('/sse', App\Http\Actions\StreamAction::class);
