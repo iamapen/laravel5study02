@@ -106,4 +106,31 @@ class EloquentTest extends TestCase
         $this->assertSame(1, \App\Author::destroy(2));
         $this->assertSame(0, \App\Author::destroy(999));
     }
+
+    function testFirstOrCreate()
+    {
+        $this->assertSame(0, \App\Author::where('name', 'なければ作成(static)')->get()->count());
+
+        // なければ作成
+        \App\Author::firstOrCreate(['name' => 'なければ作成(static)', 'kana' => 'カナ']);
+        $this->assertSame(1, \App\Author::where('name', 'なければ作成(static)')->get()->count());
+
+        // あれば何もせず
+        \App\Author::firstOrCreate(['name' => 'なければ作成(static)', 'kana' => 'カナ']);
+        $this->assertSame(1, \App\Author::where('name', 'なければ作成(static)')->get()->count());
+    }
+
+    function testFirstOrNew() {
+        $this->assertSame(0, \App\Author::where('name', 'なければ作成(static)')->get()->count());
+
+        // なければ作成
+        $author = \App\Author::firstOrNew(['name' => 'なければ作成(static)', 'kana' => 'カナ']);
+        $author->save();
+        $this->assertSame(1, \App\Author::where('name', 'なければ作成(static)')->get()->count());
+
+        // あれば何もせず
+        $author = \App\Author::firstOrNew(['name' => 'なければ作成(static)', 'kana' => 'カナ']);
+        $author->save();
+        $this->assertSame(1, \App\Author::where('name', 'なければ作成(static)')->get()->count());
+    }
 }
