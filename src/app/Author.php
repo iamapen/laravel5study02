@@ -11,4 +11,7 @@ class Author extends Model
 
     // テーブル名を指定できる
     protected $table = 'authors';
+
+    // primary keyを指定できる
+    protected $primaryKey = 'id';
 }
