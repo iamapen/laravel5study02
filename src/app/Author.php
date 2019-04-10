@@ -14,4 +14,7 @@ class Author extends Model
 
     // primary keyを指定できる
     protected $primaryKey = 'id';
+
+    // created_at/updated_atを記録する(デフォルト)
+    public $timestamps = true;
 }
