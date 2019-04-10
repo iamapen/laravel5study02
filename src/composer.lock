@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e0235693d256286646588ae256db892",
+    "content-hash": "5cbb63c219cc11593ac0b67cfc82f187",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -4129,6 +4129,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2018-08-09T05:50:03+00:00"
         },
         {
@@ -4974,7 +4975,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.0.0"
+        "php": ">=7.0.0",
+        "ext-mbstring": "*"
     },
     "platform-dev": []
 }
