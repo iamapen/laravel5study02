@@ -13,7 +13,7 @@ class AuthorTest extends TestCase
         $sut = new Author();
 
         $sut->kana = 'カナ';
-        $this->assertSame('カナ', $sut->kana);
+        $this->assertSame('ｶﾅ', $sut->kana);
 
         $sut->kana = 'ｶﾅ';
         $this->assertSame('ｶﾅ', $sut->kana);

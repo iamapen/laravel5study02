@@ -17,4 +17,25 @@ class Author extends Model
 
     // created_at/updated_atを記録する(デフォルト)
     public $timestamps = true;
+
+
+    /**
+     * kanaカラムの値を半角カナに変換して返すアクセサ
+     * @param string $value
+     * @return string
+     */
+    public function getKanaAttribute(string $value): string
+    {
+        return mb_convert_kana($value, 'k');
+    }
+
+    /**
+     * ミューテータ
+     * @param string $value
+     */
+    public function setKanaAttribute(string $value)
+    {
+        // 全角カナに変換
+        $this->attributes['kana'] = mb_convert_kana($value, 'KV');
+    }
 }
