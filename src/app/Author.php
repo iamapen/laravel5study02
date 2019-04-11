@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Author extends Model
 {
+    use SoftDeletes;
+
     // Mass Assignmentによる編集可能なカラムのブラックリスト指定
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
