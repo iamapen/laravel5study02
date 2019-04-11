@@ -1,0 +1,26 @@
+@startuml
+title データモデル
+left to right direction
+
+
+object "Author(著者)" as Author
+Author : 名前
+Author : カナ
+object Book
+Book : 名前
+Book : bookdetail_id
+Book : author_id
+Book : publisher_id
+object BookDetail
+BookDetail : ISBN
+BookDetail : 価格
+BookDetail : 出版日
+object "Publisher(出版社)" as Publisher
+Publisher : 名前
+Publisher : 住所
+
+Book "1"--"1" BookDetail
+Publisher "1"--"*" Book
+Author "1"--"*" Book
+
+@enduml
