@@ -5,6 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * 著者
+ * @package App
+ */
 class Author extends Model
 {
     use SoftDeletes;

@@ -1,14 +1,12 @@
 <?php
-
+declare(strict_types=1);
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 書籍詳細
+ * 書籍
  * @package App
  */
-class Bookdetail extends Model
-{
-    //
+class Book extends Model {
 }
