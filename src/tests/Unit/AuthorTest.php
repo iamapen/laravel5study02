@@ -46,4 +46,17 @@ class AuthorTest extends TestCase
         $this->assertSame(['著者B'], Author::onlyTrashed()->get()->sortBy('name')->pluck('name')->toArray());
         $this->getConnection()->commit();
     }
+
+    function testBook()
+    {
+        Author::create(['name' => '著者A', 'kana' => 'チョシャA',]);
+        /* @var $author Author */
+        $author = \App\Author::find(1);
+
+        $sql = $author->books()->toSql();
+        $this->assertSame(
+            'select * from `books` where `books`.`author_id` = ? and `books`.`author_id` is not null',
+            $sql
+        );
+    }
 }

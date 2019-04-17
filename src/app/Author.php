@@ -25,6 +25,14 @@ class Author extends Model
     // created_at/updated_atを記録する(デフォルト)
     public $timestamps = true;
 
+    /**
+     * 著者は複数の書籍レコードを持つ
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function books()
+    {
+        return $this->hasMany(\App\Book::class);
+    }
 
     /**
      * kanaカラムの値を半角カナに変換して返すアクセサ
