@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -120,7 +121,8 @@ class EloquentTest extends TestCase
         $this->assertSame(1, \App\Author::where('name', 'なければ作成(static)')->get()->count());
     }
 
-    function testFirstOrNew() {
+    function testFirstOrNew()
+    {
         $this->assertSame(0, \App\Author::where('name', 'なければ作成(static)')->get()->count());
 
         // なければ作成
@@ -132,5 +134,27 @@ class EloquentTest extends TestCase
         $author = \App\Author::firstOrNew(['name' => 'なければ作成(static)', 'kana' => 'カナ']);
         $author->save();
         $this->assertSame(1, \App\Author::where('name', 'なければ作成(static)')->get()->count());
+    }
+
+    function testToSql()
+    {
+        \App\Author::firstOrCreate(['name' => 'なければ作成(static)', 'kana' => 'カナ']);
+        $this->assertSame(
+            'select * from `authors` where `authors`.`deleted_at` is null',
+            \App\Author::firstOrCreate(['name' => 'なければ作成(static)', 'kana' => 'カナ'])->toSql()
+        );
+    }
+
+    function testGetQueryLog()
+    {
+        $sql1 = 'select * from `authors` where (`name` = ? and `kana` = ?) and `authors`.`deleted_at` is null limit 1';
+        $sql2 = 'insert into `authors` (`name`, `kana`, `updated_at`, `created_at`) values (?, ?, ?, ?)';
+
+        DB::enableQueryLog();
+        \App\Author::firstOrCreate(['name' => 'なければ作成(static)', 'kana' => 'カナ']);
+        $logs = DB::getQueryLog();
+        $this->assertSame($sql1, $logs[0]['query']);
+        $this->assertSame($sql2, $logs[1]['query']);
+        DB::disableQueryLog();
     }
 }
