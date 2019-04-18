@@ -36,4 +36,13 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * 資格情報をemailからnameに変更
+     * @return string
+     */
+    public function username()
+    {
+        return 'name';
+    }
 }
