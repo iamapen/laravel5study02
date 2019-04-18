@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+       $this->app->bind(
+           \App\DataProvider\FavoriteRepositoryInterface::class,
+           \App\DataProvider\FavoriteRepository::class
+       );
     }
 }
