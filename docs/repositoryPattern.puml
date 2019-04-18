@@ -1,0 +1,17 @@
+@startuml
+title リポジトリパターン
+
+class Service
+
+interface RepositoryInterface
+
+class DataAccessRDB
+class DataAccessNoSQL
+class DataAccessElasticSearch
+
+Service -> RepositoryInterface
+RepositoryInterface <|.. DataAccessRDB
+RepositoryInterface <|.. DataAccessNoSQL
+RepositoryInterface <|.. DataAccessElasticSearch
+
+@enduml
