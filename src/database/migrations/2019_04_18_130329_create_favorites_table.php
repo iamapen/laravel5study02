@@ -14,8 +14,10 @@ class CreateFavoritesTable extends Migration
     public function up()
     {
         Schema::create('favorites', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('book_id');
+            $table->integer('user_id');
             $table->timestamps();
+            $table->unique(['book_id', 'user_id'], 'UNIQUE_IDX_FAVORITES');
         });
     }
 
