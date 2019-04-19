@@ -25,6 +25,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // 独自認証ドライバの登録
+        $this->app['auth']->provider(
+            'cache_eloquent',
+            function (\Illuminate\Contracts\Foundation\Application $app, array $config) {
+                return new \App\Auth\CacheUserProvider(
+                    $app['hash'],
+                    $config['model'],
+                    $app['cache']->driver()
+                );
+            }
+        );
     }
 }
