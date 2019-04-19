@@ -43,7 +43,7 @@ return [
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'user_token',
         ],
     ],
 
@@ -68,6 +68,10 @@ return [
         'users' => [
             'driver' => 'cache_eloquent',   // 独自認証ドライバの指定
             'model' => App\User::class,
+        ],
+
+        'user_token' => [
+            'driver' => 'user_token',
         ],
 
         // 'users' => [
