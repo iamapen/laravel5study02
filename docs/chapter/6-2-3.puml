@@ -1,0 +1,35 @@
+@startuml
+title 6-2-3 独自認証プロバイダの作成
+
+package Illuminate\Contracts\Auth {
+  interface Authenticatable
+  Authenticatable : getAuthIdentifier(): int
+  Authenticatable : getAuthPassword(): string
+  interface UserProvider
+  UserProvider : retrieveByCredentials(array $credentials): Authenticatable
+  Authenticatable <- UserProvider: <<create>>
+}
+
+package App {
+  package Auth {
+    interface UserTokenProviderInterface
+    UserTokenProviderInterface : retrieveUserByToken(string $token): stdClass
+    class UserTokenProvider
+    UserProvider <|.. UserTokenProvider
+  }
+
+  package Database {
+    class UserToken
+    UserTokenProviderInterface <|.. UserToken
+  }
+
+  package Entity {
+    class User
+    Authenticatable <|.. User
+  }
+}
+
+UserTokenProvider --> UserTokenProviderInterface: ユーザ情報取得
+User <- UserTokenProvider: <<create>>
+
+@enduml
