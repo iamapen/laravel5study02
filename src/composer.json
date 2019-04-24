@@ -4,6 +4,15 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
+
+    "repositories": [
+        {
+             "type": "vcs",
+             "url": "https://github.com/iamapen/socialite"
+        }
+    ],
+
+
     "require": {
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
