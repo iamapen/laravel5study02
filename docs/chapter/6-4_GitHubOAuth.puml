@@ -1,0 +1,46 @@
+@startuml
+title GitHub OAuth の流れ
+
+actor User
+participant App
+participant GitHub
+participant AppDB
+actor 開発者
+
+== 初期設定 ==
+
+開発者 -> GitHub: アプリ登録(callbackUrl)
+activate GitHub
+  GitHub -> GitHub: "Client ID", "Client Secret" 発行
+  開発者 <-- GitHub: Client ID, Client Secret
+deactivate GitHub
+
+== アプリ利用 ==
+
+User -> App: 新規登録画面
+User <-- App: redirect(GitHubログイン画面, ClientID)
+User -> GitHub: GitHubログイン画面(ClientID)
+User <-- GitHub
+User -> GitHub: ログイン (GitHubのID/PW)
+User <-- GitHub: アプリを許可しますか画面
+User -> GitHub: 許可
+GitHub -> GitHub: code生成
+User <-- GitHub: redirect(callbackUrl, code)
+User -> App: callbackUrl(code)
+App -> GitHub: AccessToken取得(ClientID, ClientSecret, code)
+GitHub -> GitHub: AccessToken生成
+App <-- GitHub: AccessToken
+App -> GitHub: ユーザ情報取得(AccessToken)
+App <-- GitHub: GitHubユーザ情報
+App -> App: 登録処理
+activate App
+  App -> AppDB
+deactivate App
+App -> App: ログイン処理
+activate App
+  App -> App: セッションとか諸々
+deactivate App
+User <-- App: redirect(マイページ)
+User -> App: マイページ表示
+User <-- App
+@enduml
