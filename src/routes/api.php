@@ -20,4 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'api'], function ($router) {
     // ログインを行い、アクセストークンを発行するルート
     Route::post('/users/login', 'User\\LoginAction');
+    // リクエストトークンを用いて、認証ユーザの情報を取得するルート
+    Route::get('/users/', 'User\\RetrieveAction')->middleware('auth:api');
 });

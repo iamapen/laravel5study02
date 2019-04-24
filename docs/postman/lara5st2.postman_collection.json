@@ -39,7 +39,37 @@
 					"response": []
 				},
 				{
-					"name": "JWT login",
+					"name": "6.3.4.3 JWT login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"mail@example.com\",\n\t\"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6.3.4.7 Req with JWT Token",
 					"request": {
 						"method": "POST",
 						"header": [
