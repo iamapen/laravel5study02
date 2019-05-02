@@ -16,6 +16,7 @@ final class RegisterAction extends Controller
     public function __invoke(Factory $factory): RedirectResponse
     {
         // 外部サービスの呼び出し
-        return $factory->driver('github')->redirect();
+        //return $factory->driver('github')->redirect();
+        return $factory->driver('amazon')->redirect();
     }
 }

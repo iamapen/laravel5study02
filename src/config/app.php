@@ -177,6 +177,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // 教本にはこの記述はなかったが書かないと動かなかった
+        App\Providers\SocialiteServiceProvider::class,
     ],
 
     /*
