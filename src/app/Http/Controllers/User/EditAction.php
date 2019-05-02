@@ -23,15 +23,12 @@ final class EditAction extends Controller
 
     public function __invoke(string $id)
     {
-        $class = new \stdClass();
-        $class->id = $id;
+        $content = new \stdClass();
+        $content->id = $id;
 
-        // Illuminate\Foundation\Auth\Access\AuthorizesRequests trait を使う例
-        $this->authorizeForUser(
-            $this->authManager->guard()->user(),
-            'edit',
-            $class
-        );
-        return new Response('認可OK。編集可能な表示画面。');
+        // Policy を blade で呼ぶ例
+        return view('user.edit', [
+            'content' => $content,
+        ]);
     }
 }
