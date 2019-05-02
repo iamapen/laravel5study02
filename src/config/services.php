@@ -41,4 +41,10 @@ return [
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect' => 'http://localhost/register/callback',
     ],
+    // Amazon OAuth
+    'amazon' => [
+        'client_id' => env('AMAZON_CLIENT_ID'),
+        'client_secret' => env('AMAZON_CLIENT_SECRET'),
+        'redirect' => 'http://localhost/register/callback',
+    ],
 ];
