@@ -38,6 +38,15 @@ class CallbackAction extends Controller
             ])
         );
 
+        // GitHubのアクセス権に user:follow を加える例
+        //$driver->scopes(['user:follow']);
+        // GitHUbのアクセス権を設定しなおす例
+        //$driver->setScopes(['user:email', 'user:follow']);
+        // リクエスト送信時のパラメタ追加例
+        //$driver->with(['allow_signup' => 'false']);
+        // セッションに状態を保持する必要がある場合
+        //$driver->stateless()->user();
+
         // socialite経由で外部サービスのユーザ情報を取得
         $user = $driver->user();
         // ユーザ作成＆ログイン
