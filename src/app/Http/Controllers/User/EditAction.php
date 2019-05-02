@@ -26,11 +26,12 @@ final class EditAction extends Controller
         $class = new \stdClass();
         $class->id = $id;
 
-        $this->gate->forUser($this->authManager->guard()->user());
-        if ($this->gate->allows('edit', $class)) {
-            return new Response('認可OK。編集可能な表示画面。');
-        } else {
-            return new Response('認可NG。制限された表示画面。');
-        }
+        // Illuminate\Foundation\Auth\Access\AuthorizesRequests trait を使う例
+        $this->authorizeForUser(
+            $this->authManager->guard()->user(),
+            'edit',
+            $class
+        );
+        return new Response('認可OK。編集可能な表示画面。');
     }
 }
