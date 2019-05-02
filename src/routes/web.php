@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/register', 'Register\\RegisterAction')->name('register');
 Route::get('/register/callback', 'Register\\CallbackAction');
+
+Route::get('/users/{id}', 'User\RetrieveAction');

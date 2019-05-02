@@ -1,0 +1,20 @@
+@startuml
+package Illuminate\Contracts\Auth\Access {
+  interface "Gate" as IGate
+  note bottom of IGate
+    認可処理interface
+    1つの認可処理
+    「投稿者のみ」「管理者のみ」など。
+  end note
+}
+
+package Illuminate\Auth\Access {
+  class Gate
+}
+
+interface Policy
+note bottom of Policy
+  複数の認可処理を記述
+end note
+
+@enduml
