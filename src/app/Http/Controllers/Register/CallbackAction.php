@@ -25,8 +25,8 @@ class CallbackAction extends Controller
         LoggerInterface $logger
     ) {
         /* @var $driver \Laravel\Socialite\Two\GithubProvider */
-        //$driver = $factory->driver('github');
-        $driver = $factory->driver('amazon');
+        $driver = $factory->driver('github');
+        //$driver = $factory->driver('amazon');
         // 通信内容をログとして出力させる例
         $driver->setHttpClient(
             new Client([
