@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
@@ -28,9 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         // 「自身であること」を user-access という名前で認可処理として登録
-        $gate->define('user-access', function (User $user, $id) {
-            return intval($user->getAuthIdentifier()) === intval($id);
-        });
+        $gate->define('user-access', new \App\Gate\UserAccess());
         // または \Gate::define('user-access'...)
     }
 }
