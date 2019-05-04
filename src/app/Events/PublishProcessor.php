@@ -2,35 +2,29 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-
+/**
+ * Class PublishProcessor
+ *
+ * イベント自体の表現と、データ送信、両方の役割を担う。
+ * immutalbeに作る。
+ * @package App\Events
+ */
 class PublishProcessor
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    private $int;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(int $int)
     {
-        //
+        $this->int = $int;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
-    public function broadcastOn()
+    public function getInt(): int
     {
-        return new PrivateChannel('channel-name');
+        return $this->int;
     }
 }
