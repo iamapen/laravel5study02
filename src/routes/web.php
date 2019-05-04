@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $view = view('welcome');
+
+    // Dispatherクラス経由でイベントを実行する例
+    \Event::dispatch(new \App\Events\PublishProcessor(1));
+    return $view;
 });
