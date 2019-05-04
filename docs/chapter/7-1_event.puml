@@ -1,0 +1,52 @@
+@startuml
+
+class Event
+note bottom of Event
+  発生時の情報を表現
+  自信を送信
+end note
+class Listener
+note bottom of Listener: イベントに対応する処理を実行
+package Illuminate\Contracts\Events {
+  interface Dispatcher {
+    + dispatch(event:Object, payload:mixed, halt:bool)
+    + hasLIsteners(eventName:string)
+    + forget(eventClass:string)
+  }
+}
+note bottom of Dispatcher: イベントの発行、リスナの起動
+
+class EventServiceProvider {
+  # イベントとリスナの対応表
+}
+
+Event <-- Dispatcher: 発行
+Event <-- Event: 自信を送信
+Listener <-- Dispatcher: 起動
+EventServiceProvider <--- Dispatcher: 参照
+
+eventTraits <|.down.. Event
+package eventTraits {
+  package Illuminate\Queue {
+    class SerializesModels
+  }
+  note bottom of SerializesModels: Queueと組み合わせて非同期イベントを実行するときに利用
+  package Illuminate\Foundation\Events {
+    class Dispatcherable
+  }
+  note bottom of Dispatcherable: Dispatcherとして作用させる
+  package Illuminate\Broadcasting {
+    class InteractsWithSockets
+  }
+  note bottom of InteractsWithSockets: socket.ioを使ってブラウザにイベント通知する
+}
+
+package listenerTraits {
+  package Illuminate\Contracts\Queue {
+    interface ShouldQueue
+  }
+  note bottom of ShouldQueue: 非同期
+}
+listenerTraits <|. Listener
+
+@endumle
