@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Events\PublishProcessor;
-use App\Listeners\MessageSubscriber;
+use App\Listeners;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -16,7 +16,8 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         PublishProcessor::class => [
-            MessageSubscriber::class,
+            Listeners\MessageSubscriber::class,
+            Listeners\MessageQueueSubscriber::class,
         ],
     ];
 
